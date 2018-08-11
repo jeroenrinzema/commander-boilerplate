@@ -4,10 +4,7 @@ pipeline {
     stage('Build images') {
       agent any
       steps {
-        dir(path: 'docker/services/') {
-          sh 'docker-compose -f docker-compose.yml build query'
-        }
-        
+        sh 'docker-compose -f docker/services/docker-compose.yml build query'
       }
     }
   }
