@@ -5,7 +5,7 @@ pipeline {
       agent any
       steps {
         dir(path: 'docker/services/') {
-          sh 'docker-compose build query'
+          sh 'docker-compose -f docker-compose.yml build query'
         }
         
       }
