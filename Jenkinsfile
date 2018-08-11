@@ -5,8 +5,7 @@ pipeline {
       agent any
       steps {
         dir(path: 'docker/services/') {
-          sh '''pwd;
-docker-compose build query;'''
+          sh 'docker-compose build query'
         }
         
       }
