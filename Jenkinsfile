@@ -3,8 +3,10 @@ pipeline {
   stages {
     stage('Build images') {
       steps {
-        sh '''cd docker/services/;
-docker-compose build;'''
+        dir(path: 'docker/services/') {
+          sh 'docker-compose build'
+        }
+
       }
     }
   }
