@@ -4,7 +4,7 @@ pipeline {
     stage('Build images') {
       agent any
       steps {
-        dir(path: '${WORKSPACE}/docker/services/') {
+        dir(path: 'docker/services/') {
           sh '''pwd;
 docker-compose build query;'''
         }
