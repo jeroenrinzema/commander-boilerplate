@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'docker/compose'
+    }
+
+  }
   stages {
     stage('Build images') {
       steps {
