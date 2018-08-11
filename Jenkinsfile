@@ -5,6 +5,7 @@ pipeline {
       agent any
       steps {
         sh '''ls -all;
+ls -all docker/services/docker-compose.yml;
 pwd;'''
       }
     }
