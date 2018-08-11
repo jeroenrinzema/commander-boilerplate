@@ -1,13 +1,14 @@
-pipeline {
-  agent any
-  stages {
-    stage('Build command images') {
-      agent any
-      steps {
-        dir(path: 'command/') {
-          sh 'docker build . -t commander-command'
-        }
+node {
+  def app
 
+  stage('Clone repository') {
+    checkout master
+  }
+
+  stage('Build image') {
+    steps {
+      dir(path: 'command/') {
+        app = docker.build("commander-command")
       }
     }
   }
