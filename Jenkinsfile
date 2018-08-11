@@ -6,7 +6,8 @@ pipeline {
       steps {
         sh '''ls -all;
 ls -all docker/services/docker-compose.yml;
-pwd;'''
+pwd;
+whoami;'''
       }
     }
     stage('Build images') {
