@@ -1,10 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Build images') {
+    stage('Build command images') {
+      agent any
       steps {
-        dir(path: 'docker/services/') {
-          sh 'docker-compose build'
+        dir(path: 'command/') {
+          sh 'docker build . -t commander-command'
         }
 
       }
