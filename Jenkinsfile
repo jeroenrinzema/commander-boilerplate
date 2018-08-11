@@ -1,9 +1,12 @@
 pipeline {
   agent any
   stages {
-    stage('Echo') {
+    stage('Build images') {
       steps {
-        echo 'hello world'
+        dir(path: 'docker/services/') {
+          sh 'docker-compose build'
+        }
+
       }
     }
   }
