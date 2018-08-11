@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'tmaier/docker-compose'
+    }
+    
+  }
   stages {
     stage('Build images') {
       agent any
