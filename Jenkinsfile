@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'docker/compose:1.22.0'
-    }
-    
-  }
+  agent any
   stages {
     stage('Build images') {
       agent any
