@@ -9,5 +9,10 @@ pipeline {
 
       }
     }
+    stage('Notify Success') {
+      steps {
+        slackSend(message: '$JOB_NAME $BUILD_DISPLAY_NAME SUCCESS', color: 'good', botUser: true, channel: 'server')
+      }
+    }
   }
 }
