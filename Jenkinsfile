@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Notify Success') {
       steps {
-        echo '$JOB_NAME'
+        sh 'echo $JOB_NAME'
       }
     }
   }
