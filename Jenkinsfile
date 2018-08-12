@@ -1,15 +1,15 @@
 pipeline {
   agent {
     docker {
-      image 'tmaier/docker-compose'
+      image 'docker'
     }
 
   }
   stages {
     stage('Build images') {
       steps {
-        dir(path: 'docker/services') {
-          sh 'docker-compose build command'
+        dir(path: 'command/') {
+          sh 'docker build -t commander-command .'
         }
 
       }
