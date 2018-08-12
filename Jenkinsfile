@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'tmaier/docker-compose:18.06'
-    }
-
-  }
+  agent any
   stages {
     stage('Build images') {
       steps {
