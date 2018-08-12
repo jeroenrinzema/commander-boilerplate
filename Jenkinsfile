@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Notification') {
       steps {
-        slackSend(message: '${JOB_NAME} ${BUILD_DISPLAY_NAME} has started: ${BUILD_URL}', channel: 'server')
+        slackSend(message: '${env.JOB_NAME} ${env.BUILD_DISPLAY_NAME} has started: ${env.BUILD_URL}', channel: 'server')
       }
     }
     stage('Build images') {
