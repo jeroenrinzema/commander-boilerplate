@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Build images') {
       steps {
-        dir(path: 'command/') {
-          sh 'docker build --build-arg GO_PROJECT_PATH=github.com/sysco-middleware/commander-boilerplate/logic -t commander_command .'
+        dir(path: 'docker/services') {
+          sh 'docker-compose build command'
         }
 
       }
