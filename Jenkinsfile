@@ -1,15 +1,10 @@
 pipeline {
-  agent {
-    docker {
-      image 'docker/compose:1.22.0'
-    }
-
-  }
+  agent any
   stages {
     stage('Build images') {
       steps {
-        dir(path: 'docker/services') {
-          sh 'docker-compose build query'
+        dir(path: 'command/') {
+          sh 'docker build -t commander_command .'
         }
 
       }
