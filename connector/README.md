@@ -10,5 +10,5 @@ This connector requires the following environment variables to be set.
 
 ```bash
 export KAFKA_GROUP=command
-export KAFKA_BROKERS=192.168.99.100:9092
+export KAFKA_BROKERS=127.0.0.1:9092
 ```

@@ -2,7 +2,7 @@
 
 This project contains 3 docker compose files.
 
-- **Dependencies** - This docker compose file contains the dependencies (kafka, postgres ...) used by commander.
+- **Infrastructure** - This docker compose file contains the infrastructure/dependencies (kafka, postgres ...) used by commander.
 - **Images** - This docker compose file contains the images used by the services during the building process.
 - **Services** - This docker compose file contains the commander services (command, logic ...).
 
