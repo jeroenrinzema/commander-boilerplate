@@ -3,28 +3,28 @@ package controllers
 import (
 	"encoding/json"
 
-	"github.com/sysco-middleware/commander"
-	"github.com/sysco-middleware/commander-boilerplate/projector/common"
-	"github.com/sysco-middleware/commander-boilerplate/projector/models"
+	"github.com/jeroenrinzema/commander"
+	"github.com/jeroenrinzema/commander-boilerplate/projector/models"
+	"github.com/jinzhu/gorm"
 )
 
-// OnCreatedUser handles a "created" event
-func OnCreatedUser(command *commander.Event) {
-	var user models.Users
+// CreateCart handles a "created" event
+type CreateCart struct {
+	Database *gorm.DB
+}
 
-	dataParseError := json.Unmarshal(command.Data, &user)
+// Handle handles a "created" event
+func (service *CreateCart) Handle(event *commander.Event) {
+	var cart models.CartModal
+
+	dataParseError := json.Unmarshal(event.Data, &cart)
 	// Parse the data back to a struct
 	if dataParseError != nil {
-		// Optionally could you panic on a error
-		// panic(dataParseError)
 		return
 	}
 
-	query := common.Database.Create(&user)
-	// A user already exists if a error occures
+	query := service.Database.Create(&cart)
 	if query.Error != nil {
-		// Optionally could you panic on a error
-		// panic(query.Error)
 		return
 	}
 }

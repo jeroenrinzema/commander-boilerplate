@@ -1,4 +1,4 @@
-This is a boilerplate project for [commander](https://github.com/sysco-middleware/commander).
+This is a example [commander](https://github.com/jeroenrinzema/commander) project. The project represents a webshop shopping cart that 
 
 ![The pattern](https://github.com/sysco-middleware/commander/wiki/commander-pattern.jpg)
 

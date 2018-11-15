@@ -19,9 +19,9 @@ $ go run main.go
 These are the required environment variables.
 
 ```bash
-export KAFKA_GROUP=users
-export KAFKA_SERVERS=kafka:9092
-export POSTGRES_HOST=postgres
+export KAFKA_GROUP=logic
+export KAFKA_BROKERS=192.168.99.100:9092
+export POSTGRES_HOST=192.168.99.100
 export POSTGRES_PORT=5432
 export POSTGRES_USER=commander
 export POSTGRES_PASSWORD=TFgvT3Pb3bWEhXKAfgMk63bo

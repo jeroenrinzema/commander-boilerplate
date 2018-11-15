@@ -2,68 +2,49 @@ package controllers
 
 import (
 	"encoding/json"
-	"time"
 
-	uuid "github.com/satori/go.uuid"
-	"github.com/sysco-middleware/commander"
-	"github.com/sysco-middleware/commander-boilerplate/logic/common"
+	"github.com/jeroenrinzema/commander"
+	"github.com/jeroenrinzema/commander-boilerplate/logic/models"
+	"github.com/jinzhu/gorm"
 )
+
+// CreateCommand handles the "create" command
+type CreateCommand struct {
+	Database *gorm.DB
+}
 
 // CreateModal is used during a "create" command
 type CreateModal struct {
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
+	Customer string `json:"customer"`
 }
 
-// UserModel holds the structure of the users table
-type UserModel struct {
-	ID        *uuid.UUID `gorm:"type:uuid; primary_key"`
-	FirstName string     `gorm:"not null;unique"`
-	LastName  string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *time.Time `sql:"index"`
-}
-
-// TableName returns the table name of UserModal
-func (modal *UserModel) TableName() string {
-	return "ServiceUsersView"
-}
-
-// OnCreateUser handles a "create" command
-func OnCreateUser(command *commander.Command) {
+// Handle handles a "create" command and initializes a new shopping cart
+func (service *CreateCommand) Handle(writer commander.ResponseWriter, command *commander.Command) {
 	var data CreateModal
 
 	// Parse the data back to a struct
 	UnmarshalErr := json.Unmarshal(command.Data, &data)
 	if UnmarshalErr != nil {
-		command.NewError("DataParseError", nil)
+		writer.ProduceError("DataParseError", nil)
 		return
 	}
 
-	// Prepare a new user
-	key := uuid.NewV4()
-	user := UserModel{
-		ID:        &key,
-		FirstName: data.FirstName,
-		LastName:  data.LastName,
+	cart := models.CartModal{
+		ID:       &command.Key,
+		Customer: data.Customer,
 	}
 
-	query := common.Database.Create(&user)
-	// A user already exists if a error occures
+	query := service.Database.Create(&cart)
 	if query.Error != nil {
-		event := command.NewError("UserExists", nil)
-		common.Commander.ProduceEvent(event)
+		writer.ProduceError("ModelError", nil)
 		return
 	}
 
-	res, MarshalErr := json.Marshal(user)
-
+	res, MarshalErr := json.Marshal(cart)
 	if MarshalErr != nil {
-		command.NewError("ResponseParseError", nil)
+		writer.ProduceError("ResponseParseError", nil)
 		return
 	}
 
-	event := command.NewEvent("Created", key, res)
-	common.Commander.ProduceEvent(event)
+	writer.ProduceEvent("Created", 1, command.Key, res)
 }

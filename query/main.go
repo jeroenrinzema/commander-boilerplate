@@ -3,10 +3,10 @@ package main
 import (
 	"net/http"
 
+	"github.com/jeroenrinzema/commander-boilerplate/query/common"
+	"github.com/jeroenrinzema/commander-boilerplate/query/controllers"
+	"github.com/jeroenrinzema/commander-boilerplate/query/rest"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/sysco-middleware/commander-boilerplate/query/common"
-	"github.com/sysco-middleware/commander-boilerplate/query/controllers"
-	"github.com/sysco-middleware/commander-boilerplate/query/rest"
 )
 
 func main() {
@@ -15,9 +15,8 @@ func main() {
 
 	router.HandleFunc("/find/{id}", rest.Use(controllers.FindByID, Authentication)).Methods("GET")
 	router.HandleFunc("/find/", rest.Use(controllers.FindAll, Authentication)).Methods("GET")
-	router.HandleFunc("/find/name/last/{lastName}", rest.Use(controllers.FindByLastName, Authentication)).Methods("GET")
 
-	http.ListenAndServe(":8080", router)
+	http.ListenAndServe(":7070", router)
 }
 
 // Authentication validates if the given request is authenticated.
